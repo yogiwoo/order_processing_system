@@ -1,17 +1,17 @@
 const express = require("express");
 const ordersSchema = require("./orderModel")
 const router = express.Router();
-const events=require('events');
-const myEvents=new events();
+const eventEmitter=require("./eventsHandler/eventEmitter")
 router.post('/createOrder', async (req, res) => {
     const order = new ordersSchema(req.body);
     const saveOrder = await order.save();
     if (saveOrder) {
-        myEvents.emit("ORDER_CREATED",{orderId:saveOrder._id,userId:saveOrder.userId,amount:saveOrder.totalAmount});
-
-        myEvents.on("ORDER_CREATED",(data)=>{
-            console.log("event data",data)
-        })
+        const data={
+            orderId:saveOrder._id,
+            userId:saveOrder.userId,
+            totalAMount:saveOrder.totalAmount
+        }
+        eventEmitter.emit("ORDER_CREATED",data)
         res.status(201).json({
             message: "Order created successfully",
             order: saveOrder
