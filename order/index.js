@@ -1,5 +1,5 @@
 const express=require("express");
-
+const mongoose=require("mongoose");
 const app=express();
 const orderRouter=require('./orderRoutes')
 app.use(express.json());
@@ -9,5 +9,9 @@ app.get('/',(req,res)=>{
 })
 
 app.listen(3003,()=>{
+    mongoose.connect('mongodb://localhost:27017').then(()=>{
+        console.log('mongodb connected sccessfully')
+    })
     console.log("server started at 3003")
+
 })

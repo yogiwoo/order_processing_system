@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose =require('mongoose')
 const orderSchema = new mongoose.Schema({
   userId: {
     type: String,
@@ -16,5 +15,5 @@ const orderSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
-
-export default mongoose.model("Order", orderSchema);
+const orderModel=mongoose.model("Order", orderSchema);
+module.exports = orderModel
