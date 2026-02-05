@@ -7,7 +7,11 @@ router.post('/createOrder', async (req, res) => {
     const order = new ordersSchema(req.body);
     const saveOrder = await order.save();
     if (saveOrder) {
+        myEvents.emit("ORDER_CREATED",{orderId:saveOrder._id,userId:saveOrder.userId,amount:saveOrder.totalAmount});
 
+        myEvents.on("ORDER_CREATED",(data)=>{
+            console.log("event data",data)
+        })
         res.status(201).json({
             message: "Order created successfully",
             order: saveOrder

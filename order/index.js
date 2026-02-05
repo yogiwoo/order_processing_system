@@ -2,6 +2,9 @@ const express=require("express");
 const mongoose=require("mongoose");
 const app=express();
 const orderRouter=require('./orderRoutes')
+//event listner
+require("./eventsHandler/eventConsumer");
+
 app.use(express.json());
 app.use('/orders',orderRouter)
 app.get('/',(req,res)=>{
