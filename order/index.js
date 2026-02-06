@@ -5,6 +5,8 @@ const orderRouter=require('./orderRoutes')
 //event listner
 require("./eventsHandler/eventConsumer");
 require("./eventsHandler/inventoryConsumer");
+require("./eventsHandler/Inventory_update_event")
+require("./eventsHandler/paymentListner");
 app.use(express.json());
 app.use('/orders',orderRouter)
 app.get('/',(req,res)=>{
