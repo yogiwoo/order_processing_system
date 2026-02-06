@@ -4,7 +4,7 @@ const app=express();
 const orderRouter=require('./orderRoutes')
 //event listner
 require("./eventsHandler/eventConsumer");
-
+require("./eventsHandler/inventoryConsumer");
 app.use(express.json());
 app.use('/orders',orderRouter)
 app.get('/',(req,res)=>{
